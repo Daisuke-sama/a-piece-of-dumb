@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+### WordPress template
+*.log
+
+*
+!.gitignore
+
+!wp-content/
+wp-content/*
+!wp-content/plugins/
+wp-content/plugins/*
+!wp-content/plugins/custom-login-page-143213/
+!wp-content/plugins/custom-login-page-143213/**/*
