@@ -37,3 +37,8 @@ function clp1_3_remove_login_shakes() {
 	remove_action( 'login_head', 'wp_shake_js', 12 );
 }
 
+add_action('init', 'remqm');
+function remqm() {
+	global $QueryMonitor;
+	remove_action( 'plugins_loaded', [ $QueryMonitor, 'action_plugins_loaded']);
+}
