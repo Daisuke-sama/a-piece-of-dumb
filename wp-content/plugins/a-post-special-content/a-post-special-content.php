@@ -22,3 +22,31 @@ add_action( 'wp_enqueue_scripts', 'apsc_add_styles' );
 function apsc_add_styles() {
 	wp_enqueue_style( 'apsc-styles', plugin_dir_url( __FILE__ ) . 'apsc-styles.css' );
 }
+
+
+add_action( 'widgets_init', 'apsc_register_sidebar' );
+/**
+ * Registers a sidebar area on a single page.
+ */
+function apsc_register_sidebar() {
+	register_sidebar( [
+		'name'          => __( 'Post Special Content', 'apsc' ),
+		'id'            => 'apsc-sidebar',
+		'description'   => __( 'Widget in this area will be displayed in a single post.', 'apsc' ),
+		'before_widget' => '<div class="widget apsc-sidebar">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="widgettitle apsc-title">',
+		'after_title'   => '</h2>'
+	] );
+}
+
+
+add_filter( 'the_content', 'apsc_display_sidebar' );
+function apsc_display_sidebar( $content ) {
+
+	if ( is_single() && is_active_sidebar( 'apsc-sidebar' ) && is_main_query() ) {
+		dynamic_sidebar( 'apsc-sidebar' );
+	}
+
+	return $content;
+}
