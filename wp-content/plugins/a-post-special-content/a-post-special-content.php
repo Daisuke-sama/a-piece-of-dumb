@@ -20,8 +20,13 @@ add_action( 'wp_enqueue_scripts', 'apsc_add_styles' );
  * Includes styles to the page.
  */
 function apsc_add_styles() {
-	wp_enqueue_style( 'apsc-styles', plugin_dir_url( __FILE__ ) . 'apsc-styles.css' );
+	if ( apply_filters( 'apsc_load_styles', true ) ) {
+		wp_enqueue_style( 'apsc-styles', plugin_dir_url( __FILE__ ) . 'apsc-styles.css' );
+	}
 }
+
+// Uncomment the following line to keep internal stylesheets from loading.
+// add_filter('apsc_load_styles', '__return_false');
 
 
 add_action( 'widgets_init', 'apsc_register_sidebar' );
@@ -42,11 +47,15 @@ function apsc_register_sidebar() {
 
 
 add_filter( 'the_content', 'apsc_display_sidebar' );
-function apsc_display_sidebar( $content ) {
+/**
+ * Display sidebar on a single page only.
+ *
+ * @param $content
+ */
+function apsc_display_sidebar( $content ) {}
 
-	if ( is_single() && is_active_sidebar( 'apsc-sidebar' ) && is_main_query() ) {
-		dynamic_sidebar( 'apsc-sidebar' );
-	}
-
-	return $content;
+if ( is_single() && is_active_sidebar( 'apsc-sidebar' ) && is_main_query() ) {
+	dynamic_sidebar( 'apsc-sidebar' );
 }
+
+return $content;

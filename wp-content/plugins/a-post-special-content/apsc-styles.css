@@ -1,5 +1,6 @@
 .apsc-sidebar {
-    background-color: grey;
+    background-color: #efefef;
+    border-color: yellow;
     padding: 20px;
     margin-bottom: 20px;
 }
