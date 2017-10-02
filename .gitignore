@@ -11,3 +11,5 @@ wp-content/*
 wp-content/plugins/*
 !wp-content/plugins/custom-login-page-143213/
 !wp-content/plugins/custom-login-page-143213/**/*
+!wp-content/plugins/a-post-special-content/
+!wp-content/plugins/a-post-special-content/**/*
